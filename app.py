@@ -1,7 +1,7 @@
 from tkinter import filedialog
 from xml.dom import minidom
 from LinkedList import LinkedList
-from piso import Piso
+from tile import Tile
 
 def pedirNumeroEntero():
     correcto=False
@@ -34,7 +34,7 @@ def lecturaArchivosXml (data):
     #recorremos los pisos disponibles
     for piso in pisos:
         #creamos el objeto piso
-        date = Piso()
+        date = Tile()
         if piso.hasAttribute("nombre"):
             nombre = piso.getAttribute("nombre")
             r = piso.getElementsByTagName("R")[0].firstChild.data
