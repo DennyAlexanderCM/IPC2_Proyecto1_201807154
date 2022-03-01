@@ -1,19 +1,21 @@
+#CLASE NODO
 class Node:
     def __init__(self,data):
         self.data = data
         self.next = None
 
-
+#CLASE DE LA LISTA ENLAZADA
 class LinkedList:
     def __init__(self):
         self.name = None
         self.head = None
         self.last = None
 
+    #VERIFICAMOS SI LA LISTA ESTA VACÍA
     def emply(selft):
         return selft.head
 
-    #agregar al inicio
+    #AGREGAMOS LOS DATOS AL INICIO
     def add(selft , data):
         nodo = Node(data)
         if not selft.emply():
@@ -23,7 +25,7 @@ class LinkedList:
             nodo.next = selft.head
             selft.head = nodo
     
-    #agrega al final de la cola
+    #AGREGAMOS EL ELEMENTO AL FINAL DE LA LISTA
     def append(selft, data):
         nodo = Node(data)
         if not selft.emply():
@@ -32,13 +34,25 @@ class LinkedList:
             selft.last.next = nodo
             selft.last = nodo
 
-    #imprimir lista enlazada
+    #IMPRIMIMOS LOS DATOS DE LA LISTA
     def printDates(selft):
         i = selft.head
+        n = 1
         while i:
-            print(i.data)
+            print(str(n)+". "+i.data.getNombre())
             i = i.next
-    #retornar el tamaño de la lista
+            n+=1
+
+    #COPIAMOS LA LISTA
+    def copyList(selft):
+        i = selft.head
+        listAux = LinkedList()
+        while i:
+            listAux.add(i.data)
+            i = i.next
+        return listAux
+        
+    #RETORNAR EL NÚMERO DE ELEMENTOS
     def length(selft):
         n = 0
         i = selft.head
@@ -47,15 +61,55 @@ class LinkedList:
             n+=1
         return n
 
+    #ORDEAMOS ALFABETICAMNTE POR EL NOMBRE
+    def sortList(self):
+        end = None
+        while end != self.head:
+            p = self.head
+            while p.next != end:
+                q = p.next
+                if p.data.getNombre() > q.data.getNombre():
+                    p.data, q.data = q.data, p.data
+                p = p.next
+            end = p
+    
+    #ORDEAMOS ALFABETICAMNTE POR EL NOMBRE LOS PATRONES
+    def sortListPatterns(selft):
+        i = selft.head
+        while i:
+            i.data.getPatrones().sortList()
+            i = i.next
+
+    #IMPRIMIMOS LOS PATRONES
+    def printPaterns(selft):
+        i = selft.head
+        while i:
+            i.data.getPatrones().printDates()
+            i = i.next
+
+     #BUSCAMOS UN DATO EN ESPECIFICO -->nombre
     def searchDate(selft, data):
         i = selft.head
         while i:
-            if i.data == data:
-                return True
+            if i.data.getName() == data:
+                return i
             else:
                 i = i.next
         return False
 
+    #BUSCAMOS UN DATO EN ESPECIFICO POR SU POSICION
+    def searchDate(selft, selection):
+        n = 1
+        i = selft.head
+        while i:
+            if selection == n:
+                return i.data
+            else:
+                n +=1 
+                i = i.next
+        return False
+
+    #REVERTIMOS LA LISTA
     def invertList(selft):
         prev = sig = None
         i = selft.head
@@ -64,20 +118,18 @@ class LinkedList:
             i.next = prev
             prev = i
             i = sig
-        selft.head = prev 
+        selft.head = prev
 
+    def printAllDates(selft):
+        i = selft.head
+        print("\nPISOS CARGADOS AL SISTEMA:")
+        while i:
+            print("\nNOMBRE:", i.data.getNombre())
+            i.data.getPatrones().printDates()
+            i = i.next
+
+    #COLOCAR EL ELEMENTO NOMBRE
     def setName(selft, name):
         selft.name = name
+    
 
-if __name__ == "__main__":
-        li = LinkedList()
-        li.add(2)
-        li.add(3)
-        li.add(8)
-        li.add(9)
-        li.append(4)
-        li.append(5)
-        li.printDates()
-        print(li.length())
-        li.invertList()
-        li.printDates()

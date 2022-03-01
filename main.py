@@ -1,35 +1,37 @@
 from app import *
 from LinkedList import LinkedList
-
-listPisos = LinkedList()
+from tile import Tile
 
 def run():
+    listPisos = None
     end = False
     selection = 0
 
     while not end:
-        print("------------Menú------------\n1. Cargar Data\n2. Cargar Instrucciones\n3. Análizar\n4. Reportes5. Salir")
+        print("\n-------------Menú-------------\n1. Cargar patrones de piso\n2. Seleccionar piso y patrón\n3. Pisos cargados\n4. Salir")
         selection = pedirNumeroEntero()
         
         if selection == 1:
+            #OBTENEMOS LA RUTA DEL ARCHIVO
             rute = leerArchivo()
-        
+            #VERIFICAMOS SI LA RUTA NO ESTA VACÍA
             if rute != None:
-                lecturaArchivosXml(rute)
+                listPisos = lecturaArchivosXml(rute)
             else:
                 print("sin Cambios")
 
         elif selection == 2:
-            rute = leerArchivo()
-            if rute != None:
-                print(rute)
-            else:
-                print("sin Cambios")
+            #SUB MENÚ
+            menuOptions(listPisos)
         elif selection == 3:
-            print("3")
+            #COPIAMOS LA LISTA
+            copyOfList = listPisos.copyList()
+            #ORDENAMOS LA LISTA POR EL NOMBRE DEL PISO
+            copyOfList.sortList()
+            #ORDENAMOS LA LISTA POR EL NOMBRE DEL CODIGO DEL PATRON DE CADA PISO
+            copyOfList.sortListPatterns()
+            copyOfList.printAllDates()
         elif selection == 4:
-            print("3")
-        elif selection == 5:
             print("Finalizando programa...")
             end = True
         else:

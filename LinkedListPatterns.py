@@ -1,0 +1,83 @@
+#CLASE NODO
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+
+#CLASE DE LA LISTA ENLAZADA
+class LinkedListPatterns:
+    def __init__(self):
+        self.head = None
+        self.last = None
+
+    #VERIFICAMOS SI LA LISTA ESTA VACÍA
+    def emply(selft):
+        return selft.head
+
+    #AGREGAMOS LOS DATOS AL INICIO
+    def add(selft , data):
+        nodo = Node(data)
+        if not selft.emply():
+            selft.head = nodo
+            selft.last = nodo
+        else:
+            nodo.next = selft.head
+            selft.head = nodo
+    
+    #COPIAMOS LA LISTA
+    def copyList(selft):
+        i = selft.head
+        listAux = LinkedListPatterns()
+        while i:
+            listAux.add(i.data)
+            i = i.next
+        return listAux
+    
+    #ORDEAMOS ALFABETICAMNTE POR EL NOMBRE
+    def sortList(self):
+        end = None
+        while end != self.head:
+            p = self.head
+            while p.next != end:
+                q = p.next
+                if p.data.getCode() > q.data.getCode():
+                    p.data, q.data = q.data, p.data
+                p = p.next
+            end = p
+    
+    #IMPRIMIMOS LOS DATOS DE LA LISTA
+    def printDates(selft):
+        i = selft.head
+        while i:
+            print(i.data.getCode())
+            print("\t" + i.data.getPattern())
+            i = i.next
+    
+    #RETORNAR EL NÚMERO DE ELEMENTOS
+    def length(selft):
+        n = 0
+        i = selft.head
+        while i:
+            i = i.next
+            n+=1
+        return n
+
+    def printDatesNumerate(selft):
+        i = selft.head
+        n = 1
+        while i:
+            print(str(n) +". "+ i.data.getCode())
+            print("\t" + i.data.getPattern())
+            i = i.next
+            n +=1
+    #BUSCAMOS UN DATO EN ESPECIFICO POR SU POSICION
+    def searchDate(selft, selection):
+        n = 1
+        i = selft.head
+        while i:
+            if selection == n:
+                return i.data
+            else:
+                n +=1 
+                i = i.next
+        return False
