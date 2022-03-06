@@ -1,10 +1,11 @@
+from colorama import Fore
 #CLASE NODO
 class Node:
     def __init__(self,data):
         self.data = data
         self.next = None
 
-#CLASE DE LA LISTA ENLAZADA
+#CLASE DE LA LISTA ENLAZADA DE LOS PISOS
 class LinkedList:
     def __init__(self):
         self.name = None
@@ -24,12 +25,12 @@ class LinkedList:
         else:
             nodo.next = selft.head
             selft.head = nodo
-    
-    #AGREGAMOS EL ELEMENTO AL FINAL DE LA LISTA
+    #AGREGAMOS LOS DATOS AL FINAL
     def append(selft, data):
         nodo = Node(data)
         if not selft.emply():
             selft.head = nodo
+            selft.last = nodo
         else:
             selft.last.next = nodo
             selft.last = nodo
@@ -65,13 +66,13 @@ class LinkedList:
     def sortList(self):
         end = None
         while end != self.head:
-            p = self.head
-            while p.next != end:
-                q = p.next
-                if p.data.getNombre() > q.data.getNombre():
-                    p.data, q.data = q.data, p.data
-                p = p.next
-            end = p
+            aux = self.head
+            while aux .next != end:
+                q = aux .next
+                if aux.data.getNombre() > q.data.getNombre():
+                    aux.data, q.data = q.data, aux.data
+                aux = aux.next
+            end = aux
     
     #ORDEAMOS ALFABETICAMNTE POR EL NOMBRE LOS PATRONES
     def sortListPatterns(selft):
@@ -109,24 +110,15 @@ class LinkedList:
                 i = i.next
         return False
 
-    #REVERTIMOS LA LISTA
-    def invertList(selft):
-        prev = sig = None
-        i = selft.head
-        while i:
-            sig = i.next
-            i.next = prev
-            prev = i
-            i = sig
-        selft.head = prev
-
+    #IMPRIMIMOS TODOS LOS DATOS DE LOS PISOS
     def printAllDates(selft):
         i = selft.head
-        print("\nPISOS CARGADOS AL SISTEMA:")
+        print(Fore.RED + "\n\n>>>>" + Fore.YELLOW +"Pisos cargados al sistema:")
         while i:
-            print("\nNOMBRE:", i.data.getNombre())
+            print(Fore.YELLOW + "\nNombre:", i.data.getNombre())
             i.data.getPatrones().printDates()
             i = i.next
+            
 
     #COLOCAR EL ELEMENTO NOMBRE
     def setName(selft, name):

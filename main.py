@@ -1,6 +1,5 @@
-from app import *
-from LinkedList import LinkedList
-from tile import Tile
+from functions import *
+from colorama import Fore
 
 def run():
     listPisos = None
@@ -8,7 +7,7 @@ def run():
     selection = 0
 
     while not end:
-        print("\n-------------Menú-------------\n1. Cargar patrones de piso\n2. Seleccionar piso y patrón\n3. Pisos cargados\n4. Salir")
+        print(Fore.YELLOW + "\n============ Menú ============\n 1. Cargar patrones de piso\n 2. Seleccionar piso y patrón\n 3. Pisos cargados\n 4. Salir")
         selection = pedirNumeroEntero()
         
         if selection == 1:
@@ -22,9 +21,10 @@ def run():
 
         elif selection == 2:
             #SUB MENÚ
-            menuOptions(listPisos)
+            menuOptionsTile(listPisos)
+            
         elif selection == 3:
-            #COPIAMOS LA LISTA
+            #COPIAMOS LA LISTA PARA NO MODIFICAR LA LISTA PRINCIPAL
             copyOfList = listPisos.copyList()
             #ORDENAMOS LA LISTA POR EL NOMBRE DEL PISO
             copyOfList.sortList()
