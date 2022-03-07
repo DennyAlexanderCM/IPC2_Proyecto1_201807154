@@ -17,25 +17,31 @@ def run():
             if rute != None:
                 listPisos = lecturaArchivosXml(rute)
             else:
-                print("sin Cambios")
+                print(Fore.RED +"No se realizaron cambios")
 
         elif selection == 2:
-            #SUB MENÚ
-            menuOptionsTile(listPisos)
-            
+            if listPisos != None:
+                #SUB MENÚ
+                menuOptionsTile(listPisos)
+            else:
+                print(Fore.RED + "¡Lista Vacía!") 
         elif selection == 3:
-            #COPIAMOS LA LISTA PARA NO MODIFICAR LA LISTA PRINCIPAL
-            copyOfList = listPisos.copyList()
-            #ORDENAMOS LA LISTA POR EL NOMBRE DEL PISO
-            copyOfList.sortList()
-            #ORDENAMOS LA LISTA POR EL NOMBRE DEL CODIGO DEL PATRON DE CADA PISO
-            copyOfList.sortListPatterns()
-            copyOfList.printAllDates()
+            if listPisos != None:
+                #COPIAMOS LA LISTA PARA NO MODIFICAR LA LISTA PRINCIPAL
+                copyOfList = listPisos.copyList()
+                #ORDENAMOS LA LISTA POR EL NOMBRE DEL PISO
+                copyOfList.sortList()
+                #ORDENAMOS LA LISTA POR EL NOMBRE DEL CODIGO DEL PATRON DE CADA PISO
+                copyOfList.sortListPatterns()
+                copyOfList.printAllDates()
+            else:
+                print(Fore.RED + "¡Lista Vacía!") 
+            
         elif selection == 4:
             print("Finalizando programa...")
             end = True
         else:
-            print("Intente de nuevo") 
+            print(Fore.RED +"Intente de nuevo") 
 
 #Método incial
 if __name__ == '__main__':

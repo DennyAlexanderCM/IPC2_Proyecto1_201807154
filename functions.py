@@ -104,6 +104,8 @@ def selectSecondPattern(data, patterSelected):
             if selection != n2:
                 if data.getPatrones().length() >= selection and selection > 0:
                     #BUSCAMOS EL DATO EN NUESTRA LISTA objeto piso ---> lista de patrones >>funcion para buscar el patron seleccionado
+                    patronSelected = data.getPatrones().searchDate(selection)
+                    menuActionSecondPattern(data, patronSelected)
                     end = True 
                     correct = True
                 else:
@@ -111,19 +113,22 @@ def selectSecondPattern(data, patterSelected):
             else:
                 print(Fore.RED + "¡Ingrese una opción diferente!")
 
-        """
-        data.getPatrones().printDatesNumerate()
-         #SOLICITAMOS UNA OPCIÓN
+def menuActionSecondPattern(data, patternSelected):
+    end = False
+    while not end:
+        print(Fore.YELLOW + "\n========= Seleccionar Acción =========\n 1. Costo mínimo cambio de patrón\n 2. Pasos mínimos del cambio de patrón \n 3. Gráfico del Pratrón\n 4. Regresar")
+        #SOLICITAMOS UNA OPCIÓN
         selection = pedirNumeroEntero()
-        #VERIFICAMOS SI LA OPCION ESTA EN EL RANGO
-        if data.getPatrones().length() >= selection and selection > 0:
-            #BUSCAMOS EL DATO EN NUESTRA LISTA objeto piso ---> lista de patrones >>funcion para buscar el patron seleccionado
-            patronSelected = data.getPatrones().searchDate(selection)
-            menuAction(data, patronSelected)
-            #TERMINAMOS EL CICLO REPETITIVO
+        if selection == 1:
+            pass
+        elif selection == 2:
+            pass
+        elif selection ==3:
+            graphPatter(data, patternSelected.getPattern())
+        elif selection == 4:
             end = True
         else:
-            print(Fore.RED + "¡Ingrese una opción correcta!") """
+            print(Fore.RED + "¡Ingrese una opción correcta!") 
 
 def lecturaArchivosXml (data):
     listPisos = LinkedList()
@@ -146,10 +151,10 @@ def lecturaArchivosXml (data):
             f = piso.getElementsByTagName("F")[0].firstChild.data
             s = piso.getElementsByTagName("S")[0].firstChild.data
             date.setNombre(nombre)
-            date.setR(r)
-            date.setC(c)
-            date.setF(f)
-            date.setS(s)
+            date.setR(r.strip())
+            date.setC(c.strip())
+            date.setF(f.strip())
+            date.setS(s.strip())
             
             #print(date.getNombre(), date.getR(), date.getC(), date.getF(), date.getS())
             datesOfPatterns = piso.getElementsByTagName("patrones")
